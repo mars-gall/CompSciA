@@ -1,36 +1,35 @@
 public class Piece {
 
-    private  int color = 1;
+    int color = 1;
 
     public int validPieceLocation(int xPos) {
-        int i = 5;
-        while (Board.connectFour [xPos - 1][i] != 0 && i >= 0) {
-            i--;
+        int yPos = 5;
+        while (Board.connectFour [yPos][xPos - 1] != 0 && yPos > 0) {
+            yPos--;
         }
-            return i;
+            return yPos;
     }
 
-    public int newPiece(int xPos) {
+    public void newPiece(int xPos) {
         if (validPieceLocation(xPos) == -1) {
             System.out.println("No valid position in this column");
-            return 0;
         }
         else { 
-            Board.connectFour[xPos][validPieceLocation(xPos)] = color;
+            Board.connectFour[validPieceLocation(xPos)][xPos - 1] = color;
+            System.out.println(color + " piece has been placed on " + "(" + xPos + ", " + validPieceLocation(xPos) + ")");
             swapPieceColor(color);
-            System.out.println(color + " piece has been placed on " + xPos + ", " + validPieceLocation(xPos));
-            return 1;
         }
     }
 
-    public String swapPieceColor(String color) {
-        if (color == white) {
-            return black;
+    public void swapPieceColor(int inputColor) {
+        if (inputColor == 1) {
+            color = 2;
         }
         else {
-            return white;
+            color = 1;
         }
     }
+
 
     
 
